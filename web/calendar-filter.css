@@ -1,0 +1,77 @@
+/* CalendarFilter styles. Override the custom properties to match your app. */
+.cf {
+  --cf-text: #1c1c1c;
+  --cf-muted: #6f6f6f;
+  --cf-faint: #a3a3a3;
+  --cf-surface: #ffffff;
+  --cf-subtle: #f4f2ef;
+  --cf-hover: rgb(0 0 0 / 0.06);
+  --cf-border: rgb(0 0 0 / 0.08);
+  --cf-solid: #1c1c1c;
+  --cf-on-solid: #ffffff;
+  --cf-accent: #b4432f;
+  --cf-shadow: 0 12px 32px rgb(0 0 0 / 0.14), 0 2px 6px rgb(0 0 0 / 0.06);
+  position: relative;
+  display: inline-block;
+  font: inherit;
+}
+@media (prefers-color-scheme: dark) {
+  .cf {
+    --cf-text: #ededed;
+    --cf-muted: #a0a0a0;
+    --cf-faint: #6e6e6e;
+    --cf-surface: #232323;
+    --cf-subtle: #2b2b2b;
+    --cf-hover: rgb(255 255 255 / 0.07);
+    --cf-border: rgb(255 255 255 / 0.08);
+    --cf-solid: #ededed;
+    --cf-on-solid: #1c1c1c;
+    --cf-accent: #ff7a5c;
+  }
+}
+.cf button { font: inherit; color: inherit; }
+.cf-icon { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+
+.cf-button { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 12px 0 10px; border: 0; border-radius: 10px; background: none; color: var(--cf-muted) !important; font-size: 14px; white-space: nowrap; cursor: pointer; transition: background-color 100ms ease, color 100ms ease; }
+.cf-button:hover, .cf-button[aria-expanded="true"] { background: var(--cf-hover); color: var(--cf-text) !important; }
+.cf-button.set { color: var(--cf-accent) !important; }
+
+.cf-pop { position: absolute; left: 0; top: calc(100% + 6px); z-index: 30; width: min(300px, calc(100vw - 32px)); padding: 12px; border-radius: 16px; background: var(--cf-surface); color: var(--cf-text); box-shadow: var(--cf-shadow); transform-origin: top left; animation: cf-in 140ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+@keyframes cf-in { from { opacity: 0; scale: 0.97; } }
+
+.cf-head { display: flex; align-items: center; gap: 4px; margin-bottom: 10px; }
+.cf-nav { display: grid; place-items: center; width: 32px; height: 32px; flex: none; border: 0; border-radius: 8px; background: none; color: var(--cf-muted) !important; cursor: pointer; }
+.cf-nav:hover:not(:disabled) { background: var(--cf-hover); color: var(--cf-text) !important; }
+.cf-nav:disabled { opacity: 0.3; cursor: default; }
+.cf-title { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 4px; border: 0; border-radius: 8px; background: none; font-weight: 600; font-size: 15px; text-transform: capitalize; cursor: pointer; }
+.cf-title small { font-weight: 400; font-size: 12px; color: var(--cf-faint); text-transform: none; }
+.cf-title:hover:not(:disabled), .cf-title.on { background: var(--cf-hover); }
+.cf-title:disabled { cursor: default; }
+
+.cf-months { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.cf-month { display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 10px 4px; border: 0; border-radius: 10px; background: var(--cf-subtle); font-size: 14px; font-weight: 500; text-transform: capitalize; cursor: pointer; transition: background-color 80ms ease, scale 160ms ease; }
+.cf-month small { font-size: 11px; font-weight: 400; color: var(--cf-faint); font-variant-numeric: tabular-nums; }
+.cf-month:hover:not(:disabled) { background: var(--cf-hover); }
+.cf-month:active:not(:disabled) { scale: 0.96; }
+.cf-month:disabled { background: none; color: var(--cf-faint) !important; opacity: 0.6; cursor: default; }
+.cf-month.on { background: var(--cf-solid); color: var(--cf-on-solid) !important; }
+.cf-month.on small { color: inherit; opacity: 0.7; }
+
+.cf-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.cf-wd { text-align: center; font-size: 11px; color: var(--cf-faint); padding: 2px 0 6px; text-transform: uppercase; }
+.cf-day { position: relative; aspect-ratio: 1; border: 0; border-radius: 50%; background: none; font-size: 13px; font-variant-numeric: tabular-nums; color: var(--cf-faint) !important; cursor: default; }
+.cf-day:not(:disabled) { color: var(--cf-text) !important; font-weight: 600; cursor: pointer; }
+.cf-day:not(:disabled):hover { background: var(--cf-hover); }
+.cf-day i { position: absolute; left: 50%; bottom: 4px; width: 4px; height: 4px; margin-left: -2px; border-radius: 50%; background: var(--cf-accent); }
+.cf-day.today { box-shadow: inset 0 0 0 1px var(--cf-border); }
+.cf-day.on { background: var(--cf-solid); color: var(--cf-on-solid) !important; }
+.cf-day.on i { background: var(--cf-on-solid); }
+
+.cf-link { border: 0; background: none; padding: 6px 10px; border-radius: 8px; color: var(--cf-accent) !important; font-size: 14px; font-weight: 500; cursor: pointer; }
+.cf-link:hover { background: var(--cf-hover); }
+.cf-up { display: block; margin: 10px auto 0; }
+.cf-foot { display: flex; justify-content: center; margin-top: 10px; padding-top: 10px; box-shadow: 0 -1px 0 var(--cf-border); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cf-pop { animation: none; }
+}
